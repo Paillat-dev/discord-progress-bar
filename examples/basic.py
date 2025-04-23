@@ -22,13 +22,13 @@ class MyCog(discord.Cog):
 
     @discord.Cog.listener()
     async def on_ready(self) -> None:
-        print(f"Logged in as {bot.user} (ID: {bot.user.id})")
+        print(f"Logged in as {bot.user} (ID: {bot.user.id})")  # pyright: ignore [reportOptionalMemberAccess]
         print("------")
         self.progress_bar_manager = await ProgressBarManager(self.bot)
         self.progress_bar = await self.progress_bar_manager.progress_bar("green", length=10)
         print("Progress bar manager loaded.")
 
-    @discord.slash_command()
+    @discord.slash_command()  # pyright: ignore [reportUntypedFunctionDecorator]
     async def get_progress_bar(self, ctx: discord.ApplicationContext, percent: float | None = None) -> None:
         """Send a progress bar message."""
         if percent is None:
