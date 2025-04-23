@@ -79,17 +79,24 @@ from discord_progress_bar import ProgressBarManager
 # Create a Discord bot with emoji caching enabled
 bot = discord.Bot(cache_app_emojis=True)
 
+progress_bar_manager = None
+progress_bar = None
+
 @bot.event
 async def on_ready():
+    """Initialize the ProgressBarManager when the bot is ready."""
+    global progress_bar_manager, progress_bar
+
     # Initialize the progress bar manager
     progress_bar_manager = await ProgressBarManager(bot)
     # Get a progress bar with the "green" style
     progress_bar = await progress_bar_manager.progress_bar("green")
 
-    # Use it in your commands
-    @bot.slash_command()
-    async def show_progress(ctx, percent: float = 0.5):
-        await ctx.respond(f"Progress: {progress_bar.partial(percent)}")
+@bot.slash_command()
+async def show_progress(ctx, percent: float = 0.5):
+    """Display a progress bar with the specified percentage."""
+
+    await ctx.respond(f"Progress: {progress_bar.partial(percent)}")
 
 # Run your bot
 bot.run("YOUR_TOKEN")
