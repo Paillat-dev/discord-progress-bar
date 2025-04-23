@@ -58,7 +58,7 @@ Built on:
 ## Installation
 
 ```bash
-pip install discord-progress-bar --prerelease=allow
+pip install discord-progress-bar --pre
 ```
 
 <!-- prettier-ignore -->
