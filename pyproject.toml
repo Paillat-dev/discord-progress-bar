@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "discord-progress-bar"
 dynamic = ["version", "urls", "readme"]
-description = "A python library to easily create progress bars with discord emojis"
+description = "A Python library for creating customizable progress bars with Discord emojis in your Discord bot messages."
 authors = [
     { name = "Paillat-dev", email = "me@paillat.dev" }
 ]
