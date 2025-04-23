@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: ["main", "dev"]
+  release:
+    types: [created]
+
+jobs:
+  quality:
+    uses: ./.github/workflows/quality.yaml
+    permissions:
+      contents: read
+
+  publish:
+    needs: quality
+    if: github.event_name == 'release'
+    uses: ./.github/workflows/publish.yaml
+    permissions:
+      id-token: write
+      contents: read

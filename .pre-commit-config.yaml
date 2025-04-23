@@ -1,0 +1,34 @@
+# Copyright (c) NiceBots
+# SPDX-License-Identifier: MIT
+
+ci:
+  autoupdate_commit_msg: ":construction_worker: pre-commit autoupdate"
+  autofix_commit_msg: ":art: auto fixes from pre-commit.com hooks"
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.(po|pot|yml|yaml)$
+      - id: end-of-file-fixer
+        exclude: \.(po|pot|yml|yaml)$
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        args: [--prose-wrap=always, --print-width=88]
+        exclude: \.(po|pot|yml|yaml)$
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.9.10
+    hooks:
+      # Run the linter.
+      - id: ruff
+        args: [ --fix ]
+      # Run the formatter.
+      - id: ruff-format
+  - repo: https://github.com/bhundven/copywrite # waiting for https://github.com/hashicorp/copywrite/pull/120 to be merged
+    rev: 937f17f09c46992447dfa8977bb96eda512588c4
+    hooks:
+      - id: add-headers

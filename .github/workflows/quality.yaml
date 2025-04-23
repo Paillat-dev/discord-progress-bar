@@ -1,0 +1,54 @@
+name: Quality Checks
+
+on:
+  workflow_call:
+
+jobs:
+  check-license-header:
+    name: License Header Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Copywrite
+        uses: hashicorp/setup-copywrite@5e3e8a26d7b9f8a508848ad0a069dfd2f7aa5339
+      - name: Check Header Compliance
+        run: copywrite headers --plan --config .copywrite.hcl
+
+  quality:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [format, lint, basedpyright]
+        include:
+          - check: format
+            name: "Format Check"
+            command: "uv run ruff format --check ."
+          - check: lint
+            name: "Lint Check"
+            command: "uv run ruff check ."
+          - check: basedpyright
+            name: "Type Check"
+            command: "uv run basedpyright ."
+
+    name: ${{ matrix.name }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: ${{ matrix.name }}
+        run: ${{ matrix.command }}

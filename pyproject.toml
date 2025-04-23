@@ -1,0 +1,124 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "discord-progress-bar"
+dynamic = ["version", "urls"]
+description = "A python library to easily create progress bars with discord emojis"
+readme = "README.md"
+authors = [
+    { name = "Paillat-dev", email = "me@paillat.dev" }
+]
+license = "MIT"
+requires-python = "==3.12.*"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Typing :: Typed",
+    "Operating System :: OS Independent",
+]
+keywords = ["discord", "bot", "emojis", "emoji", "progress-bar"]
+dependencies = [
+    "aiofile>=3.9.0",
+    "aiohttp>=3.11.18",
+    "py-cord",
+]
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.28.1",
+    "python-dotenv>=1.0.1",
+    "ruff>=0.9.9",
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/discord_progress_bar/_version.py"
+
+[tool.hatch.metadata.hooks.vcs.urls]
+Homepage = "https://github.com/Paillat-dev/discord-progress-bar"
+source_archive = "https://github.com/Paillat-dev/discord-progress-bar/archive/{commit_hash}.zip"
+
+[tool.hatchling]
+name = "discord-progress-bar"
+
+[tool.hatch.build]
+include = [
+    "src/discord_progress_bar/",
+]
+exclude = [
+    ".copywrite.hcl",
+    ".github",
+    ".python-version",
+    "uv.lock",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/discord_progress_bar"]
+
+[tool.pyright]
+pythonVersion = "3.12"
+typeCheckingMode = "all"
+reportUnusedCallResult = false
+reportAny = false
+executionEnvironments = [
+    { root = "src/discord_progress_bar/_version.py", reportDeprecated = false },
+    { root = "examples", reportExplicitAny = false, reportUnknownMemberType = false, reportUnusedParameter = false, reportImplicitOverride = false }
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false
+docstring-code-line-length = "dynamic"
+exclude = [
+    "src/discord_progress_bar/_version.py"
+]
+
+[tool.ruff.lint]
+select = ["ALL"]
+per-file-ignores = { "examples/**/*" = ["INP001", "ARG002", "T201"] }
+extend-ignore = [
+    "N999",
+    "D104",
+    "D100",
+    "D103",
+    "D102",
+    "D101",
+    "D107",
+    "D105",
+    "D106",
+    "ANN401",
+    "TRY003",
+    "EM101",
+    "EM102",
+    "G004",
+    "PTH",
+    "D211",
+    "D213",
+    "COM812",
+    "ISC001",
+    "D203",
+    "FBT001",
+    "FBT002",
+    "PLR2004",
+    "PLR0913",
+    "C901",
+    "ISC003" # conflicts with basedpyright reportImplicitStringConcatenation
+]
+
+[tool.uv.sources]
+py-cord = { git = "https://github.com/Pycord-Development/pycord" }
