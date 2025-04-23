@@ -32,9 +32,13 @@ Discord bot messages.
   - [Different Progress Bar States](#different-progress-bar-states)
   - [Custom Progress Bar Length](#custom-progress-bar-length)
 - [Configuration](#configuration)
+  - [Bot Configuration](#bot-configuration)
+  - [Progress Bar Manager Initialization](#progress-bar-manager-initialization)
+  - [Custom Progress Bar Styles](#custom-progress-bar-styles)
 - [Limitations](#limitations)
 - [Getting Help](#getting-help)
 - [Development](#development)
+  - [Local Testing](#local-testing)
   - [Contributing](#contributing)
 - [License](#license)
 

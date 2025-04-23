@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling", "hatch-vcs"]
+requires = ["hatchling", "hatch-vcs", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 [project]
 name = "discord-progress-bar"
-dynamic = ["version", "urls"]
+dynamic = ["version", "urls", "readme"]
 description = "A python library to easily create progress bars with discord emojis"
 readme = "README.md"
 authors = [
@@ -44,6 +44,34 @@ version-file = "src/discord_progress_bar/_version.py"
 [tool.hatch.metadata.hooks.vcs.urls]
 Homepage = "https://github.com/Paillat-dev/discord-progress-bar"
 source_archive = "https://github.com/Paillat-dev/discord-progress-bar/archive/{commit_hash}.zip"
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+start-after = "<!-- badges -->\n"
+end-before = "\n<!-- end badges -->"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = "\n\n---\n"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+start-after = "## Overview\n"
+end-before = "\n## Installation"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+start-after = "<!-- quick-start -->"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
+replacement = '[\1](https://github.com/Paillat-dev/discord-progress-bar/tree/main\g<2>)'
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = '\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]'
+replacement = '**\1**:'
 
 [tool.hatchling]
 name = "discord-progress-bar"
