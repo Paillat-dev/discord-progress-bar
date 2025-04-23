@@ -290,10 +290,9 @@ await self.progress_bar_manager.create_emojis_from_files("custom_style", custom_
 > [!WARNING]
 > Please be aware of the following limitations:
 >
-> - **Python Version**: Requires Python 3.12 only
+> - **Python Version**: Supports Python 3.12 only
 > - **Discord Bot Framework**: Currently only supports py-cord, not discord.py or other Discord API wrappers
-> - **Emoji Creation**: Requires bot permissions to create and manage emojis in at least one server
-> - **Emoji Limits**: Subject to Discord's emoji limits (50 custom emojis for regular servers, 200 for servers with Nitro boosts)
+> - **Emoji Limits**: Subject to Discord's app emoji limits (2'000 emojis per app -  should be plenty for most use cases)
 > - **Pre-release Status**: This package is currently in alpha stage and may have unexpected behaviors or breaking changes in future versions
 > - **Custom Styles**: Creating custom styles requires providing all six emoji parts (LEFT_EMPTY, LEFT_FILLED, MIDDLE_EMPTY, MIDDLE_FILLED, RIGHT_EMPTY, RIGHT_FILLED)
 
@@ -314,36 +313,6 @@ If you encounter issues or have questions about discord-progress-bar:
 > Before asking for help, check if your question is already answered in the [examples directory](/examples) or existing GitHub issues.
 
 ## Development
-
-### Local Testing
-
-To set up a local development environment:
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/Paillat-dev/discord-progress-bar.git
-   cd discord-progress-bar
-   ```
-
-2. Create a virtual environment and install dependencies:
-
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   pip install -e ".[dev]"    # Install the package in development mode with dev dependencies
-   ```
-
-3. Create a `.env` file with your Discord bot token:
-
-   ```
-   DISCORD_TOKEN=your_discord_bot_token
-   ```
-
-4. Run the example bot:
-   ```bash
-   python examples/basic.py
-   ```
 
 ### Contributing
 
