@@ -79,24 +79,21 @@ from discord_progress_bar import ProgressBarManager
 # Create a Discord bot with emoji caching enabled
 bot = discord.Bot(cache_app_emojis=True)
 
-progress_bar_manager = None
-progress_bar = None
+# Create the progress bar manager (doesn't load emojis yet)
+progress_manager = ProgressBarManager(bot)
 
 @bot.event
 async def on_ready():
-    """Initialize the ProgressBarManager when the bot is ready."""
-    global progress_bar_manager, progress_bar
+    """Load emojis when the bot is ready."""
+    await progress_manager.load()
+    print(f"Logged in as {bot.user}")
 
-    # Initialize the progress bar manager
-    progress_bar_manager = await ProgressBarManager(bot)
-    # Get a progress bar with the "green" style
-    progress_bar = await progress_bar_manager.progress_bar("green")
-
-@bot.slash_command()
+@bot.command()
 async def show_progress(ctx, percent: float = 0.5):
     """Display a progress bar with the specified percentage."""
 
-    await ctx.respond(f"Progress: {progress_bar.partial(percent)}")
+    progress_bar = await progress_manager.progress_bar("green", length=10)
+    await ctx.send(f"Progress: {progress_bar.partial(percent)}")
 
 # Run your bot
 bot.run("YOUR_TOKEN")
@@ -233,13 +230,21 @@ This is required for the `ProgressBarManager` to properly load and manage emojis
 
 ### Progress Bar Manager Initialization
 
-Initialize the `ProgressBarManager` after your bot is ready:
+Create a `ProgressBarManager` instance when your bot starts, and load emojis in the
+`on_ready` event:
 
 ```python
-@discord.Cog.listener()
-async def on_ready(self) -> None:
-    self.progress_bar_manager = await ProgressBarManager(self.bot)
+# Create the manager (doesn't load emojis yet)
+progress_manager = ProgressBarManager(bot)
+
+@bot.event
+async def on_ready():
+    """Load emojis from the server after the bot is ready."""
+    await progress_manager.load()
 ```
+
+This approach ensures that your bot can properly initialize and load emojis once it's
+connected to Discord.
 
 ### Custom Progress Bar Styles
 
