@@ -74,10 +74,10 @@ pip install discord-progress-bar --pre
 
 ```python
 import discord
-from discord_progress_bar import ProgressBarManager, ProgressBarPart
+from discord_progress_bar import ProgressBarManager
 
-# Create a Discord bot
-bot = discord.Bot()
+# Create a Discord bot with emoji caching enabled
+bot = discord.Bot(cache_app_emojis=True)
 
 # Create the progress bar manager (doesn't load emojis yet)
 progress_manager = ProgressBarManager(bot)
