@@ -148,4 +148,4 @@ extend-ignore = [
 ]
 
 [tool.uv.sources]
-py-cord = { git = "https://github.com/Pycord-Development/pycord", rev = "cd1531d7ffffceece4f013b956d06b9fe52c10fb" }
+py-cord = { git = "https://github.com/Pycord-Development/pycord", rev = "237724573288d025b91cc160fcadb323f7cec0bd" }
