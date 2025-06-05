@@ -92,8 +92,8 @@ async def on_ready():
 async def show_progress(ctx, percent: float = 0.5):
     """Display a progress bar with the specified percentage."""
 
-      progress_bar = await progress_manager.progress_bar("green", length=10)
-      await ctx.send(f"Progress: {progress_bar.partial(percent)}")
+    progress_bar = await progress_manager.progress_bar("green", length=10)
+    await ctx.send(f"Progress: {progress_bar.partial(percent)}")
 
 # Run your bot
 bot.run("YOUR_TOKEN")

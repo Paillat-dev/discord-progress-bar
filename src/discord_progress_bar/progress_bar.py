@@ -122,7 +122,8 @@ class ProgressBarManager:
             A ProgressBar instance with the specified emojis.
 
         Raises:
-            ValueError: If the progress bar is not found or the manager is not loaded.
+            ValueError: If the progress bar is not found 
+            RuntimeError: If the manager is not loaded.
 
         """
         if not self.loaded:
