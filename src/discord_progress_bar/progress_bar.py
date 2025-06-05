@@ -122,7 +122,7 @@ class ProgressBarManager:
             A ProgressBar instance with the specified emojis.
 
         Raises:
-            ValueError: If the progress bar is not found 
+            ValueError: If the progress bar is not found
             RuntimeError: If the manager is not loaded.
 
         """
