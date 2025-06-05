@@ -28,7 +28,7 @@ repos:
         args: [ --fix ]
       # Run the formatter.
       - id: ruff-format
-  - repo: https://github.com/bhundven/copywrite # waiting for https://github.com/hashicorp/copywrite/pull/120 to be merged
-    rev: 937f17f09c46992447dfa8977bb96eda512588c4
+  - repo: https://github.com/Paillat-dev/copywrite # waiting for https://github.com/hashicorp/copywrite/pull/120 to be merged
+    rev: 627dfedabfb34bc8c789da46cb355405fa00c0c5
     hooks:
       - id: add-headers
