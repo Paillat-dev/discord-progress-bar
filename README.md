@@ -230,7 +230,8 @@ This is required for the `ProgressBarManager` to properly load and manage emojis
 
 ### Progress Bar Manager Initialization
 
-Create a `ProgressBarManager` instance when your bot starts, and load emojis in the `on_ready` event:
+Create a `ProgressBarManager` instance when your bot starts, and load emojis in the
+`on_ready` event:
 
 ```python
 # Create the manager (doesn't load emojis yet)
@@ -242,7 +243,8 @@ async def on_ready():
     await progress_manager.load()
 ```
 
-This approach ensures that your bot can properly initialize and load emojis once it's connected to Discord.
+This approach ensures that your bot can properly initialize and load emojis once it's
+connected to Discord.
 
 ### Custom Progress Bar Styles
 
