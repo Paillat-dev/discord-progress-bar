@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 from collections import defaultdict
-from typing import Self, cast
+from typing import cast
 
 import aiofile
 import aiohttp
@@ -67,20 +67,25 @@ class ProgressBarManager:
     def __init__(self, bot: discord.Bot) -> None:
         self._bot: discord.Bot = bot
         self._emojis: dict[str, ProgressBarEmojiMapping] = defaultdict(dict)
-
-    async def __new__(cls, bot: discord.Bot) -> Self:
-        obj = super().__new__(cls)
-        obj.__init__(bot)
-        await obj.load()
-        return obj
+        self._loaded: bool = False
 
     async def load(self) -> None:
-        await self._bot.wait_until_ready()
+        """Load emojis from the Discord server.
+
+        This method should be called after the bot is ready.
+        Typically called in your bot's on_ready event.
+        """
         for emoji in self._bot.app_emojis:
             if emoji.name.startswith("pb_"):
                 key: str = emoji.name.split("_")[1]
                 part: ProgressBarPart = cast("ProgressBarPart", int(emoji.name.split("_")[2]))
                 self._emojis[key][part] = emoji
+        self._loaded = True
+
+    @property
+    def loaded(self) -> bool:
+        """Check if the manager has been loaded."""
+        return self._loaded
 
     async def create_emojis_from_urls(self, name: str, emojis: ProgressBarUrlMapping) -> None:
         async with aiohttp.ClientSession() as session:
@@ -107,9 +112,27 @@ class ProgressBarManager:
             self._emojis[name][key] = emoji
 
     async def progress_bar(self, name: str, *, length: int = 5) -> ProgressBar:
+        """Get a progress bar by name.
+
+        Args:
+            name: The name of the progress bar.
+            length: The length of the progress bar (default is 5).
+
+        Returns:
+            A ProgressBar instance with the specified emojis.
+
+        Raises:
+            ValueError: If the progress bar is not found
+            RuntimeError: If the manager is not loaded.
+
+        """
+        if not self.loaded:
+            raise RuntimeError("ProgressBarManager has not been loaded yet. Call load() first.")
+
         if name not in self._emojis:
             if default := DEFAULT_PROGRESS_BARS.get(name):
                 await self.create_emojis_from_urls(name, default)
             else:
                 raise ValueError(f"Progress bar {name} not found.")
+
         return ProgressBar(self._emojis[name], length=length)
