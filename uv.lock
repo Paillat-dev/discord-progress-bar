@@ -120,7 +120,7 @@ dev = [
 requires-dist = [
     { name = "aiofile", specifier = ">=3.9.0" },
     { name = "aiohttp", specifier = ">=3.11.18" },
-    { name = "py-cord", git = "https://github.com/Pycord-Development/pycord?rev=8619b6902b79b72438e229b2715e0c7642b70333" },
+    { name = "py-cord", git = "https://github.com/Pycord-Development/pycord?rev=1c65fc820b7faf7c02041b14ef43ed28ac18a24c" },
 ]
 
 [package.metadata.requires-dev]
@@ -234,8 +234,8 @@ wheels = [
 
 [[package]]
 name = "py-cord"
-version = "2.6.1.dev257+g8619b690"
-source = { git = "https://github.com/Pycord-Development/pycord?rev=8619b6902b79b72438e229b2715e0c7642b70333#8619b6902b79b72438e229b2715e0c7642b70333" }
+version = "2.6.1.dev258+g1c65fc82"
+source = { git = "https://github.com/Pycord-Development/pycord?rev=1c65fc820b7faf7c02041b14ef43ed28ac18a24c#1c65fc820b7faf7c02041b14ef43ed28ac18a24c" }
 dependencies = [
     { name = "aiohttp" },
     { name = "typing-extensions" },
