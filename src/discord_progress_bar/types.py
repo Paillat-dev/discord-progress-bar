@@ -1,4 +1,3 @@
-# ruff: noqa: A005
 # Copyright (c) Paillat-dev
 # SPDX-License-Identifier: MIT
 
