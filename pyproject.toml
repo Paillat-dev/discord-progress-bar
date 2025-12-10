@@ -24,7 +24,7 @@ keywords = ["discord", "bot", "emojis", "emoji", "progress-bar"]
 dependencies = [
     "aiofile>=3.9.0",
     "aiohttp>=3.11.18",
-    "py-cord",
+    "py-cord>=2.7.0rc2",
 ]
 
 [dependency-groups]
@@ -146,6 +146,3 @@ extend-ignore = [
     "C901",
     "ISC003" # conflicts with basedpyright reportImplicitStringConcatenation
 ]
-
-[tool.uv.sources]
-py-cord = { git = "https://github.com/Pycord-Development/pycord", rev = "fce3fc187f0436b8c9e7e92a9d0a4178d048d704" }
