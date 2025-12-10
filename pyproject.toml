@@ -10,7 +10,7 @@ authors = [
     { name = "Paillat-dev", email = "me@paillat.dev" }
 ]
 license = "MIT"
-requires-python = ">=3.12,<3.14"
+requires-python = ">=3.14,<3.15"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
